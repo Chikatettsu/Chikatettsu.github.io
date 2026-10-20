@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>地下鉄 — Illustration Portfolio</title>
+  <meta name="description" content="イラストのご依頼用ポートフォリオです。" />
+  <meta name="author" content="地下鉄" />
+  <meta name="robots" content="noai, noimageai" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="地下鉄 ポートフォリオ" />
+  <meta property="og:description" content="イラストのご依頼用ポートフォリオです。" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <span class="nav-logo">地下鉄</span>
+    <ul class="nav-links">
+      
+      <li><a href="#works">Works</a></li>
+      <li><a href="#info">Info</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-wrap">
+      <img src="images/340.png" alt="" class="hero-bg" aria-hidden="true" />
+      <div class="hero-scrim"></div>
+    </div>
+    <div class="hero-body">
+      <p class="hero-eyebrow">Illustration Portfolio</p>
+      <h1 class="hero-name">地下鉄</h1>
+      
+      <a href="#works" class="hero-cta">View Works ↓</a>
+    </div>
+  </section>
+
+  <!-- WORKS -->
+  <section class="works" id="works">
+    <div class="works-intro">
+      <p class="eyebrow">Works</p>
+      <h2 class="works-heading">Selected Works</h2>
+      <p class="works-note">画像をクリックで拡大 · ←→キーで前後に移動</p>
+    </div>
+
+    <!-- プロジェクトカード（クリックでギャラリーが開く） -->
+    <div id="projects" class="proj-cards"></div>
+  </section>
+
+  <!-- INFO -->
+  <section class="info" id="info">
+    <div class="info-wrap">
+      <p class="eyebrow">Info</p>
+      <h2 class="info-heading">ご依頼について</h2>
+      <div class="info-chips">
+        <span>キャラクターイラスト</span>
+        <span>キャラクターデザイン</span>
+        <span>アニメーション</span>
+        <span>Live2D</span>
+      </div>
+      <p class="leadtime-label">制作時間の目安</p>
+      <ul class="info-leadtime">
+        <li><span>イラスト1枚</span><span>約3時間</span></li>
+        <li><span>キャラクターシート</span><span>約13時間</span></li>
+        <li><span>アニメーション</span><span>約15時間〜</span></li>
+      </ul>
+      <p class="info-note">※ 内容・サイズにより変動します。これまでの平均的な目安です。</p>
+      <p class="info-tools">使用ソフト：ibisPaint X / After Effects / Live2D / Illustrator</p>
+    </div>
+  </section>
+
+  <!-- ギャラリーオーバーレイ -->
+  <div class="gal" id="gal">
+    <div class="gal-inner">
+      <button class="gal-close" id="galClose" aria-label="閉じる">✕</button>
+      <div class="gal-header">
+        <h2 class="gal-title" id="galTitle"></h2>
+        <p class="gal-desc"  id="galDesc"></p>
+      </div>
+      <div id="galHighlights"></div>
+      <div id="galWorldview"></div>
+      <div class="gal-grid" id="galGrid"></div>
+      <div class="gal-footer">
+        <button class="gal-close-bottom" id="galCloseBottom" aria-label="一覧に戻る">✕ 一覧に戻る</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <p class="eyebrow" style="color:rgba(255,255,255,.4)">Contact</p>
+    <h2 class="contact-heading">お問い合わせ</h2>
+    <p class="contact-sub">ご依頼・ご連絡はメールにてお気軽にどうぞ。</p>
+    <a href="mailto:dexiazhi84@gmail.com" class="contact-link">dexiazhi84@gmail.com</a>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2026 地下鉄　All rights reserved.</p>
+  </footer>
+
+
+  <!-- SUB-GALLERY (応募特典など) -->
+  <div class="subgal" id="subgal" aria-modal="true" role="dialog">
+    <div class="subgal-bar">
+      <span class="subgal-ttl" id="subgalTitle"></span>
+      <span class="subgal-note" id="subgalNote"></span>
+      <button class="subgal-x" id="subgalX" aria-label="閉じる">✕</button>
+    </div>
+    <div class="subgal-grid" id="subgalGrid"></div>
+  </div>
+
+  <!-- INSTAGRAM CONFIRM MODAL -->
+  <div id="ig-confirm" class="ig-confirm">
+    <div class="ig-confirm-box">
+      <p class="ig-confirm-msg">他の動画はInstagramでご覧ください！</p>
+      <a id="ig-confirm-link" href="" target="_blank" rel="noopener noreferrer" class="ig-confirm-go">Instagramで見る →</a>
+      <button id="ig-confirm-cancel" class="ig-confirm-cancel">キャンセル</button>
+    </div>
+  </div>
+
+  <!-- SUB-GALLERY LIGHTBOX -->
+  <div class="subgal-lb" id="subgalLb">
+    <button class="subgal-lb-x"    id="subgalLbX"    aria-label="閉じる">✕</button>
+    <button class="subgal-lb-prev" id="subgalLbPrev" aria-label="前へ">&#8592;</button>
+    <button class="subgal-lb-next" id="subgalLbNext" aria-label="次へ">&#8594;</button>
+    <div class="subgal-lb-media">
+      <img id="subgalLbImg" src="" alt="" />
+      <video id="subgalLbVid" src="" controls playsinline style="display:none;"></video>
+    </div>
+    <div class="subgal-lb-counter" id="subgalLbCounter"></div>
+    <div class="subgal-lb-caption" id="subgalLbCaption"></div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lb" id="lb" aria-modal="true" role="dialog">
+    <button class="lb-x" id="lbX" aria-label="閉じる">✕</button>
+    <button class="lb-arrow lb-prev" id="lbPrev" aria-label="前へ">&#8592;</button>
+    <button class="lb-arrow lb-next" id="lbNext" aria-label="次へ">&#8594;</button>
+
+    <div class="lb-stage">
+      <img id="lbImg" src="" alt="" />
+      <video id="lbVid" controls playsinline style="display:none; max-height:80vh; max-width:100%; border-radius:4px;"></video>
+    </div>
+
+    <div class="lb-footer">
+      <div class="lb-thumbs" id="lbThumbs"></div>
+      <div class="lb-meta">
+        <p class="lb-caption" id="lbCaption"></p>
+        <p class="lb-detail"  id="lbDetail"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  /* ============================================================
+     PROJECT DATA — セクション名はPDF準拠
+     画像の追加・移動はここだけ編集すればOK
+  ============================================================ */
+  const PROJECTS = [
+    {
+      cat:   '委託イラスト',
+      title: '創作企画スチル',
+      desc:  '友人が執筆するストーリーの挿絵です。シーンの感情をより強く届けたい場面では、静止画だけでなく動画でも演出しています。',
+      cover: 'images/23.jpg',
+      images: [
+        { src: 'images/23.jpg',  alt: '創作企画スチル',                note: '2026年5月 · 4時間40分 / ibisPaint X',                   caption: '' },
+        { src: 'images/thumb-stills-sensei.jpg', video: 'videos/stills-sensei.mp4',   alt: '創作企画スチル', note: '2025年6月 · 約8時間 / ibisPaint X · After Effects',    caption: '' },
+        { src: 'images/thumb-stills-aishiteru.jpg', video: 'videos/stills-aishiteru.mp4', alt: '創作企画スチル', note: '2024年10月 · 約8時間 / ibisPaint X · After Effects',   caption: '' },
+        { src: 'images/128.png', alt: '創作企画スチル',              note: '2024年10月 · 約5時間 / ibisPaint X',                    caption: '' },
+        { src: 'images/01.png',  alt: '創作企画スチル',                note: '2026年3月 · 1時間53分 / ibisPaint X',                   caption: '' },
+        { src: 'images/135.png', alt: '創作企画スチル',                note: '2025年3月 · 約4時間53分 / ibisPaint X',                 caption: '' },
+        { src: 'images/thumb-stills-yueppi.jpg', video: 'videos/stills-yueppi.mp4', alt: '創作企画スチル', note: '2024年8月 · 7時間 / ibisPaint X · After Effects',       caption: '' },
+        { src: 'images/12.png',  alt: '創作企画スチル',                note: '2025年3月 · 2時間38分 / ibisPaint X',                   caption: '' },
+        { src: 'images/121.png', alt: '創作企画スチル',                note: '2024年7月 · 1時間9分 / ibisPaint X',                    caption: '' },
+        { src: 'images/122.png', alt: '創作企画スチル',                note: '2024年10月 · 3時間16分 / ibisPaint X',                  caption: '' },
+        { src: 'images/123.png', alt: '創作企画スチル',                note: '2024年11月 · 約2時間 / ibisPaint X',                    caption: '' },
+        { src: 'images/124.png', alt: '創作企画スチル', pos: 'center 34%', note: '2024年7月 · 3時間19分 / ibisPaint X',               caption: '' },
+        { src: 'images/125.png', alt: '創作企画スチル',                note: '2024年11月 · 2時間32分 / ibisPaint X',                  caption: '' },
+        { src: 'images/126.png', alt: '創作企画スチル',                note: '2024年10月 · 約3時間 / ibisPaint X',                    caption: '' },
+        { src: 'images/127.png', alt: '創作企画スチル',                note: '2024年7月 · 2時間46分 / ibisPaint X',                   caption: '' },
+        { src: 'images/129.png', alt: '創作企画スチル', pos: 'bottom', note: '2024年7月 · 約3時間 / ibisPaint X',                    caption: '' },
+        { src: 'images/130.png', alt: '創作企画スチル',                note: '2024年9月 · 約2時間半 / ibisPaint X',                   caption: '' },
+        { src: 'images/131.png', alt: '創作企画スチル',                note: '2024年12月 · 約2時間 / ibisPaint X',                    caption: '' },
+        { src: 'images/132.png', alt: '創作企画スチル',                note: '2024年11月 · 約2時間 / ibisPaint X',                    caption: '' },
+        { src: 'images/133.png', alt: '創作企画スチル',                note: '2024年9月 · 2時間11分 / ibisPaint X',                   caption: '' },
+        { src: 'images/134.png', alt: '創作企画スチル', pos: 'center 34%', note: '2023年12月 · 5時間48分 / ibisPaint X',              caption: '' },
+        { src: 'images/136.png', alt: '創作企画スチル',                note: '2025年5月 · 2時間12分 / ibisPaint X',                   caption: '' },
+        { src: 'images/137.png', alt: '創作企画スチル',                note: '2025年5月 · 2時間35分 / ibisPaint X',                   caption: '' },
+        { src: 'images/138.png', alt: '創作企画スチル',                note: '2024年3月 · 1時間16分 / ibisPaint X',                   caption: '' },
+        { src: 'images/91.png',  alt: 'アニマ 創作企画ヘッダー', pos: 'top', note: '2024年9月 · 約22時間 / ibisPaint X',              caption: '' },
+        { src: 'images/329.png', alt: '作画ミスと饅頭が怖かった',      note: '2025年1月 · 16時間 / ibisPaint X',                      caption: '' },
+        { src: 'images/140.png', alt: '創作企画スチル',                note: '2026年4月 · 1時間57分 / ibisPaint X',                   caption: '' },
+        { src: 'images/thumb-stills-taihen.jpg', video: 'videos/stills-taihen.mp4', alt: '創作企画スチル', note: '2025年7月 · 約10時間 / ibisPaint X · After Effects · Live 2D', caption: '' },
+        { src: 'images/02.png',  alt: '創作企画ヘッダー',             note: '2026年3月 · 2時間1分 / ibisPaint X',                    caption: '' },
+        { src: 'images/45.png',  alt: 'ファンアート', pos: 'center 30%', note: '2025年4月 · 1時間50分 / ibisPaint X',                  caption: '' },
+        { src: 'images/34.png',  alt: 'ファンアート',                  note: '2025年5月 · 約1時間 / ibisPaint X',                     caption: '' },
+        { src: 'images/93.png',  alt: '創作企画スチル',                note: '2024年10月 · 約1時間半 / ibisPaint X',                  caption: '' },
+        { src: 'images/120.png', alt: '創作企画スチル',                note: '2026年11月 · 2時間10分 / ibisPaint X',                  caption: '' },
+        { src: 'images/nyannyan.png', alt: '創作企画スチル',           note: '2024年12月 · 5時間4分 / ibisPaint X',                   caption: '' },
+      ]
+    },
+    {
+      cat:   '委託イラスト',
+      title: '創作企画主催',
+      desc:  'SNS上で、主催の執筆する物語の登場人物となるキャラクターを募集する形の共同創作企画を開催しました。「白い服を纏う少年少女」という世界観をベースに、物語の随所に伏線を配置しています。メインビジュアル・告知イラスト・宣伝動画・参加者へのお礼イラストなどを制作しました。',
+      cover: 'images/39.gif',
+      worldview: {
+        omote: '子どもたちは、学校のような建物の中で穏やかに暮らしています。授業を強制されることはなく、朝礼が終われば、あとはずっと自由時間。校庭で駆け回り、図書室で本を読み、先生に勉強を教わる——そんな毎日。親元に帰りたいと思う子は、誰もいません。',
+        ura: '舞台は、度重なる戦争で汚染され切った近未来の地球。ある秘密組織は、この地球を一度リセットするべく、人類を滅ぼして輪廻転生によって世界を最初からやり直す計画を進めていました。感情を増幅させ、人々から理性と命を奪うために操作された世界。学校は組織の施設であり、子どもたちは本来、そのための兵士として育てられるはずでした。しかし、感情を持たないよう作られた教師は、子どもたちと過ごすうちに芽生えた愛から、彼らを守る道を選びます。',
+      },
+      images: [
+        { src: 'images/39.gif',  alt: 'メインビジュアル', note: '2025年1月 · 3時間10分 / ibisPaint X', caption: '企画のメインビジュアル。不穏ながらもかわいらしい表現を目指しました。' },
+        { src: 'images/94.png',  alt: '告知画像', note: '2025年3月 · 1時間 / ibisPaint X', caption: '世界観や概要を伝える資料の表紙です。' },
+        { src: 'images/thumb-kikaku-risu.jpg', video: 'videos/kikaku-risu.mp4', muted: true, alt: '宣伝動画', note: '2025年2月 · 約15時間 / ibisPaint X · After Effects', caption: '手書きアニメーションで、暖かくも切ない物語を表現しました。' },
+        { src: 'images/thumb-kikaku-screenrec.jpg', video: 'videos/kikaku-screenrec.mp4', alt: '参加者発表動画', note: '2025年12月 · 約20時間 / ibisPaint X · After Effects', caption: '世界観に沿った演出や、動くカラーイラストを使用することでワクワクする結果発表を目指しました。' },
+        { src: 'images/thumb-kikaku-bo.jpg',   video: 'videos/kikaku-bo.mp4',   muted: true, alt: '宣伝動画', note: '2025年10月 · 約4時間 / ibisPaint X · After Effects', caption: '' },
+        { src: 'images/thumb-kikaku-senden.jpg', video: 'videos/kikaku-senden.mp4', muted: true, alt: '宣伝動画', note: '2025年11月 · 約10時間 / ibisPaint X · After Effects', caption: '' },
+        { src: 'images/95.png',  alt: '告知イラスト', note: '2025年9月 · 1時間30分 / ibisPaint X', caption: '「夏ですから、雪でも降らせましょう。」そう言って、先生は久しぶりに校庭を真っ白にした。\n\nどちらかというまでもなく、雪は冬だろう。夏は暑いから涼もうというニュアンスにしたって、今となってはもはや気の持ちようでしかない。\n\n1階の教室の埃みたいに落ちてくる白い欠片をしばらく眺めていた先生は、やがて端っこで丸まっていた私に目を向けて、雪だるまでも作ろうと言い出した。\n\n私は手を貸さないまま、7個の雪だるまが周りに並べられた。\n\n彼らの特徴が捉えられた器用なそれの中に、先生はいなかった\n\n先生は、一つ増えた雪だるまに気づいてたかな' },
+        { src: 'images/kikaku-4201.png', alt: '告知イラスト', note: '2025年10月 · 2時間10分 / ibisPaint X', caption: '「あなたは手のかからない子だ」と、先生は私に言った。\n\nそれもそうだ、私は毎日のほとんどを眠って過ごしているから。\n\nそれなのに、どうしてそんなに私に目をかけるのかと訊いた\n\n心配いらないと手を離しているうちに、何も言わぬまま手遅れになってしまう\n\nそんな場合があるんだと話した先生は、誰のことを思い浮かべていたんだろう' },
+        { src: 'images/185.png', alt: '告知イラスト', note: '2025年11月 · 2時間52分 / ibisPaint X', caption: '校庭は、この空間の中で唯一とも言える沢山の色が集まった場所。\n\n視界いっぱいの緑は、ここの白くて広い建物の無機質さと違って 穏やかに私を包み込む。その小さな空間が心地いいから、私は枝と葉っぱに囲まれたここが好き\n\nここは風が吹かないから、葉の擦れる音は聞こえない。その代わりに校庭で遊ぶ人たちのはしゃぎ声が聞こえてくるのが丁度よかった\n\nひとりが好きといっても、ひとりぼっちは居心地が悪いから' },
+        { src: 'images/178.png', alt: '告知イラスト', note: '2025年11月 · 2時間52分 / ibisPaint X', caption: '学校の校則はそこまで多くない\n\n破ったからといって、地獄のように恐ろしい罰が決まっているわけでもない\n\n沢山の制約で縛りつけることはよくない。やるなと言われればやりたくなるものだ\n\nしかし、やるなと言われなければ実行することだってあるから塩梅が難しい。\n\nつまり、そもそも考えさせず、発想させないことがいちばん良い。そのためのいちばんの方法は、最初から教えないことだ。\n\nそんなことに思いを馳せながら、鉛筆の芯をコンセントへ差し込んだ件の反省文を書いた。図書室にあった「人類のおばかな過ち図鑑」は回収された。' },
+        { src: 'images/96.png',  alt: '告知イラスト', note: '2025年11月 · 3時間32分 / ibisPaint X', caption: 'もうおしまいかあ\n\nなんだか あっというまだったね' },
+        { src: 'images/146.png', alt: '告知イラスト', note: '2025年11月 · 1時間4分 / ibisPaint X', caption: 'さみしい？\n\nどうか、そんなふうに思わないで…きっとまた会えるよ\n\nそう言って、あなたは微笑んでみせました' },
+        { src: 'images/147.png', alt: '告知イラスト', note: '2025年11月 · 55分 / ibisPaint X', caption: 'じゃあ、またね\n\nまってるから' },
+        { src: 'images/143.png', alt: '告知イラスト', note: '2025年10月 · 1時間39分 / ibisPaint X', caption: 'あなたは、自分に代わりがないと思いますか\n\nどんなものにだって代えられない あなただけの価値を、ちゃんと持っていますか\n\nたとえば、まっしろなうさぎの群れの一匹がすり替わったとして。あなたはそれに気づけるでしょうか\n\nわたしたちも、ある者から見れば うさぎの群れの一匹にすぎないかもしれません\n\nそんな時、あなたはその者に自らを示せるでしょうか\n\n知っていますか\n\nうさぎには声帯がないことを' },
+        { src: 'images/144.png', alt: '告知イラスト', note: '2025年11月 · 49分 / ibisPaint X', caption: '告知イラスト。' },
+        { src: 'images/157.png', alt: '告知イラスト', note: '2025年 · 42分 / ibisPaint X', caption: 'わたしたちが わたしたちであるのは\n\nそのようにうまれて、このようにいきてゆくため\n\nだから だれかが、きゅうに、むやみに、それをかえてしまうことは\n\nひどくやばんで、よけいなことだと、わたしはおもうのです。' },
+        { src: 'images/kikaku-3915.png', alt: '仮キャラクターシート', note: '2025年4月 · 約3時間 / ibisPaint X', caption: '主催キャラクターの仮キャラクターシートです。つぶれて読めなくなっている文字には世界観の核心に触れることが書いてあるなど、伏線を散りばめられるよう意識しました。' },
+        { src: 'images/kikaku-4339.png', alt: '企画ヘッダー', note: '2025年12月 · 9時間6分 / ibisPaint X', caption: '参加キャラクターたちが教室の席につく日常を描きました。' },
+        { src: 'images/203.jpg', alt: 'デフォルメキャラクター', note: '2026年1月 · 2時間49分 / ibisPaint X', caption: '企画の運営に使用するために描いたミニキャラクターです。様々な色を使ってかわいらしく仕上げました。' },
+        { src: 'images/150.png', alt: '誕生日イラスト', note: '2026年4月 · 約2時間 / ibisPaint X', caption: 'キャラクターの誕生日のお祝いイラストです。' },
+        { src: 'images/187.png', gallery: ['images/187.png', 'images/188.png', 'images/189.png', 'images/190.png', 'images/191.png', 'images/192.png', 'images/193.png'], alt: '証明写真風イラスト', note: '2025年10月 · 約7時間 / ibisPaint X', caption: '証明写真風イラスト集。全7点。' },
+        { src: 'images/160.png', gallery: ['images/148.png', 'images/160.png', 'images/161.png', 'images/163.png', 'images/164.png', 'images/165.png', 'images/168.png', 'images/169.png', 'images/170.png', 'images/171.png', 'images/172.png', 'images/173.png', 'images/174.png', 'images/175.png', 'images/176.png', 'images/177.png', 'images/179.png', 'images/180.png', 'images/181.png', 'images/182.png', 'images/184.png', 'images/194.png'], alt: '応募特典 お礼イラスト', note: '2025年10月 · 1枚あたり約2時間 / ibisPaint X', caption: '参加者へのお礼として制作したキャラクターイラスト集。全22点。' },
+      ]
+    },
+    {
+      cat:   'ファンアート',
+      title: 'ファンアート',
+      desc:  '原作の設定に沿いながら発想を飛ばしたファンイラストです。元のキャラクターの良さを大切にしながら、その輝きを自分なりに表現することが好きです。',
+      cover: 'images/03.png',
+      images: [
+
+
+
+
+
+
+        { src: 'images/03.png',  alt: 'ファンアート',                    note: '2026年1月 · 6時間15分 / ibisPaint X',  caption: '可愛らしくもおそろしい一面のある女性の持つストーリーや魅力を最大限引き出せるよう構成を考えました。' },
+        { src: 'images/fanart-making-line.png', alt: '制作プロセス', note: '2026年1月 / ibisPaint X', gallery: [
+            { src: 'images/fanart-making-rough.png',       caption: 'STEP 1｜イラスト内容の案（ラフ：30分）\n設定から連想を広げる。運命の相手＝実在しない赤い糸（彩度を上げて異常さを表現）、妊娠という思い込み＝反応のない検査薬に巻きつく赤い糸、コウノトリを殺し空のおくるみ＝妄想による攻撃性、ウエディングドレス＝想像の中だけの結婚。ひとつの設定から、象徴に落とし込める要素を洗い出していきます。' },
+            { src: 'images/fanart-making-composition.png', caption: 'STEP 2｜構成ラフ（30分）\n各場面をどう画面に配置するかを検討した構成案。全体の流れとバランスを整理します。' },
+            { src: 'images/fanart-making-line.png',        caption: 'STEP 3｜線画（2時間）\n”全部かわいく”見せる構図。指輪を奪う場面はリング越しに少女を見せ、ドアスコープから覗くような魚眼構図で”覗き見”の関係性そのものを表現。大きく描かれた少女が「見ている」存在感を担います。' },
+            { src: 'images/fanart-making-final.png',       caption: 'STEP 4｜塗り完成・加工前（塗り：3時間）' },
+            { src: 'images/03.png',                        caption: 'STEP 5｜完成（加工：30分）\n妊娠を確信し、一方的に運命の相手と定めた人物に執着するストーカーの女子高生。設定から連想した象徴を一枚に描き込みました。' },
+            { src: 'images/fanart-making-final.png', video: 'videos/fanart-making.mp4', caption: '制作の流れを30秒にまとめたメイキング動画です。' },
+          ], caption: '《制作プロセス》ラフ→線画→完成→動画まで。クリックでご覧いただけます。' },
+        { src: 'images/04.png',  alt: 'ファンアート', pos: 'top',          note: '2026年4月 · 6時間3分 / ibisPaint X',   caption: 'ひとりかくれんぼをモチーフとした少女です。押入れの扉をすこし開けて、見つけてもらえることを楽しみにしながらも、彼女を探してくれる人は誰もいないというストーリーを表現しました。' },
+        { src: 'images/82.png',  alt: '「子守唄」',                        note: '2025年9月 · 7時間50分 / ibisPaint X',  caption: '子守唄を歌って寝かしつけるはずが先に眠ってしまった少女と、そんな少女の純粋さに救われている男性のイラストです。' },
+        { src: 'images/17.png',  alt: '「ひとつの棺」', pos: 'center 20%', note: '2025年4月 · 3時間57分 / ibisPaint X',  caption: '吸血鬼をモチーフとした魔法少女の双子。片割れが実は既に死亡していることを、もう片方は気づいていません。' },
+        { src: 'images/248.png', alt: 'ファンアート',                      note: '2023年11月 · 7時間45分 / ibisPaint X', caption: '研究者気質の魔法少女。科学的でありマジカルである、天才的に賢くもまだ幼い少女である不思議な空気感を表現しました。' },
+        { src: 'images/251.png', alt: 'ファンアート',                      note: '2024年4月 · 3時間48分 / ibisPaint X',  caption: 'ステッカーのようなポップなデザインに纏めることに挑戦しました。本編内の小ネタをたくさん入れ込み、見ていて楽しいイラストになるよう意識しました。' },
+        { src: 'images/20.png',  alt: 'ファンアート',                      note: '2025年8月 · 5時間 / ibisPaint X',      caption: '死体と人形を繋ぎ邪神を宿した少女。保存と停滞を象徴する冷蔵庫という舞台で、その歪な生い立ちを表現しました。' },
+        { src: 'images/43.png',  alt: 'ファンアート（漫画）', pos: 'top',  note: '2025年7月 · 4時間30分 / ibisPaint X',  caption: "1ページの中で、異質な二人の『種族・人柄・関係性』を完結させ、最後にオチを与える構成を意識しました。" },
+        { src: 'images/244.png', alt: '「おしまい」',                      note: '2024年7月 · 8時間25分 / ibisPaint X',  caption: '夢見る少女を演じることをやめた青年。アリスモチーフであることからチェスのキングの位置に人物を配置し、物語の終わりとして、鏡の向こうの不思議の国で物語に耽る少女が燃えています。' },
+        { src: 'images/06.png',  alt: '「家族写真」', pos: 'center 30%',   note: '2025年 · 約2時間 / ibisPaint X',       caption: '血の繋がりのない人間と人外の家族です。2人だけの異質な家族写真と、重い色使いで不穏さを表現しました。' },
+        { src: 'images/07.png',  alt: 'ファンアート',                      note: '2025年8月 · 約1時間半 / ibisPaint X',  caption: 'プリンセスに憧れる女性です。あなたはプリンセスなんだという想いを込め、魔法のようなきらめきによって、ティアラの非現実的な存在感を表現しました。' },
+        { src: 'images/09.png',  alt: 'ファンアート',                      note: '2025年5月 · 2時間5分 / ibisPaint X',   caption: '' },
+        { src: 'images/11.png',  alt: 'ファンアート', pos: 'center 35%',   note: '2025年3月 · 約1時間 / ibisPaint X',    caption: '不器用な少女のささやかな微笑みと、明るく爽やかな空気感を表現しました。' },
+        { src: 'images/19.png',  alt: 'ファンアート',                      note: '2025年9月 · 1時間20分 / ibisPaint X',  caption: 'ポスターのような印象的な雰囲気を目指して制作しました。実体のある少女には影を描き、実体のないもう一人の少女には影を付けないことで、存在の違いを表現しています。' },
+        { src: 'images/28.png',  alt: 'ファンアート', pos: 'top',          note: '2025年7月 · 約2時間半 / ibisPaint X',  caption: '高圧的な雰囲気を持つ女性。見上げる構図にすることで、相手を圧倒するような存在感を表現しています。' },
+        { src: 'images/41.png',  alt: 'ファンアート',                      note: '2025年6月 · 約2時間半 / ibisPaint X',  caption: 'お菓子屋を営む殺人鬼の女性です。ピニャータをモチーフとして取り入れることで、可愛らしさの中にどこか猟奇的な雰囲気が混ざるよう表現しています。' },
+        { src: 'images/42.png',  alt: 'ファンアート',                      note: '2025年7月 · 約2時間半 / ibisPaint X',  caption: 'ぬいぐるみ入りのフラワーアレンジメントをイメージして制作しました。' },
+        { src: 'images/24.png',  alt: 'ファンアート',                      note: '2026年4月 · 1時間46分 / ibisPaint X',  caption: '明るく溌剌とした色使いを意識し、補色を用いることでそれぞれの色が際立つよう表現しました。背景には爆発的な光をイメージした表現を取り入れ、人物の持つ迫力やエネルギー感を演出しています。' },
+        { src: 'images/54.png',  alt: 'ファンアート',                      note: '2024年1月 · 約2時間 / ibisPaint X',    caption: '普段の水彩風のやわらかな滲み表現ではなく、輪郭や色のメリハリを意識した、はっきりとした塗りで仕上げました。' },
+        { src: 'images/245.png', alt: 'ファンアート', pos: 'center 20%',   note: '2024年10月 · 約1時間半 / ibisPaint X', caption: 'ビビッドで可愛らしい色使いを意識し、全体の雰囲気が統一感のある可愛らしい画面になるよう仕上げました。' },
+        { src: 'images/246.png', alt: 'ファンアート',                      note: '2023年10月 · 4時間 / ibisPaint X',     caption: '宇宙空間などがモチーフの男の子。宇宙服と生身の人間の対比による異質感を表現しました。' },
+        { src: 'images/247.png', alt: 'ファンアート',                      note: '2023年10月 · 3時間 / ibisPaint X',     caption: '天使を題材とした世界観の中に生きる、海をモチーフとした女性。水に溶ける青いインクが天使の羽に見えるよう描きました。' },
+        { src: 'images/249.png', alt: '「すくえなかった」', pos: 'center 32%', note: '2024年1月 · 2時間33分 / ibisPaint X', caption: 'オタマジャクシをモチーフとした女の子。首を吊って死亡しており、彼女を救えなかった兄はその事を悔やんでいます。貧乏であることからコンティニューができない、オタマジャクシたちによっていじめの痕跡が覆い隠されているなどの意図を持って構図を決めました。' },
+        { src: 'images/250.png', alt: '「ツーショット」',                  note: '2024年1月 · 3時間18分 / ibisPaint X',  caption: '学校に植えられたヒマワリだった魔法少女。いつもお世話をしてくれていた女の子と再会することを目標としていますが、その女の子はすでに死亡していることから、交わらない運命にある二人を表現しました。' },
+        { src: 'images/252.png', alt: 'ファンアート', pos: 'top',          note: '2024年5月 · 3時間40分 / ibisPaint X',  caption: '爽やかで穏やかな、とある午後の空気感をイメージして制作しました。単なる白ではなく、赤みや青みを重ねることで、やわらかなあたたかさを表現しています。' },
+        { src: 'images/253.png', alt: '「救世主」',                        note: '2025年2月 · 約1時間半 / ibisPaint X',  caption: '自らを救世主と認識し、アンドロイドとして生まれ変わった男性です。構図にはピエタのオマージュを取り入れています。' },
+      ]
+    },
+    {
+      cat:   'キャラクター作成のプロセス',
+      title: 'キャラクター作成のプロセス',
+      stepTitles: true,
+      desc:  '創作企画に応募するキャラクターを例に、世界観の理解から完成までの制作プロセスを紹介します。',
+      cover: 'images/proc-cs.png',
+      images: [
+        { src: 'images/proc-ref.png', gallery: ['images/proc-ref.png', 'images/proc-stock.png'], alt: 'STEP 1　リサーチ・アイデアのストック', note: '/ iPhone', caption: '日頃から「良い」と感じたデザイン・色味・構図をテーマ別に収集し、作りたい設定のアイデアも常にストックしています。こうした日々の蓄積が、引き出しの多さにつながっています。全2点。' },
+        { src: 'images/proc-memo.jpg', alt: 'STEP 2　キャラクター設定メモ', note: '/ iPhone', caption: 'まず世界観を深く理解し、そこから連想される要素を洗い出します。連想された要素をつなげつつ、あえて応募ルールぎりぎりの逆張りを狙うことで、他の応募者と被らない個性を生み出します。強みと弱み、本編で克服できる欠点、目新しい過去設定までを、一人の人物として矛盾なく作り込んでいきます。また大人数で進行する企画では、他者と円滑に交流できるキャラクターが求められがちなため、その点も意識します。今回は「自分の仕事が大好きで、どんな人にも自分から話しかけにいける」という社交的な人物像にしました。' },
+        { src: 'images/proc-rough.png', alt: 'STEP 3　ビジュアルのラフ', note: '/ ibisPaint X', caption: 'かわいさと個性を両立させつつ、世界観から浮かない人物像を意識してラフを描きます。今回はサイバーパンクの世界観に合わせ、天使のモチーフを取り入れながら、本人がその世界で選びそうな服装に落とし込みました。' },
+        { src: 'images/proc-cs-sup.png', alt: 'STEP 4　武器・ビジュアルの設計', note: '/ ibisPaint X', caption: '武器は「背が低く力が弱いため弓を使っていた」という設定から弓を持たせつつ、仲間を守る使命感を剣に、天使モチーフを円環（ヘイロー）にと変形する多機能なデザインにしました。設定の一つひとつをビジュアルへ落とし込んでいます。' },
+        { src: 'images/proc-cs.png', alt: 'STEP 5　完成 応募キャラクターシート「アンヘル」', note: '/ ibisPaint X', caption: '完成した応募用キャラクターシート。限られた情報量の中で人物像が伝わるよう、レイアウトと配色にこだわりました。' },
+        { src: 'images/proc-back1.png', gallery: [
+            { src: 'images/proc-back1.png', caption: '名前に込めた意味。コードネーム「Angel／Unhell」は、読みが同じでも過去と現在で意味が変わるように設計しています。' },
+            { src: 'images/proc-back2.png', caption: '記憶を失うまでの過去の物語。（1／3）' },
+            { src: 'images/proc-back3.png', caption: '記憶を失うまでの過去の物語。（2／3）' },
+            { src: 'images/proc-back4.png', caption: '記憶を失うまでの過去の物語。（3／3）' },
+            { src: 'images/proc-back5.png', caption: '武器・髪・名前など、一つひとつの設定に込めた意図をまとめた補足です。' },
+          ], alt: 'おまけ　裏設定の解説', note: '/ ibisPaint X', caption: '名前に込めた意味や過去の物語など、応募シートには載せきれない裏設定をまとめた解説資料。全5点。' },
+      ]
+    },
+    {
+      cat:   'キャラクターシート',
+      title: 'キャラクターシート',
+      desc:  '複数人でキャラクターを持ち寄り主催がストーリーを構成する共同創作企画に参加する際に制作した設定シートです。立ち絵・性格・設定を1枚に収めるよう工夫しました。',
+      cover: 'images/13.png',
+      images: [
+
+        { src: 'images/13.png',  alt: 'キャラクターシート',  note: '2023年6月 · 合計15時間 / ibisPaint X',    caption: 'Xのサムネイルの仕組みを利用し、人物が半分ずつ繋がるように横長に制作しました。瑞々しいりんごと質の悪くなったリンゴで対比をさせています。リンゴとカニに関係するキャラクターであるため、飾り枠の四隅はカニをイメージした装飾となっています。' },
+        { src: 'images/32.png',  alt: 'キャラクターシート',  note: '2023年6月 · 合計15時間 / ibisPaint X',    caption: 'Xのサムネイルの仕組みを利用し、人物が半分ずつ繋がるように横長に制作しました。瑞々しいりんごと質の悪くなったリンゴで対比をさせています。リンゴとカニに関係するキャラクターであるため、飾り枠の四隅はカニをイメージした装飾となっています。' },
+        { src: 'images/30.png',  alt: 'キャラクターシート',  note: '2023年6月 · 合計15時間 / ibisPaint X',    caption: 'Xのサムネイルの仕組みを利用し、人物が半分ずつ繋がるように横長に制作しました。瑞々しいりんごと質の悪くなったリンゴで対比をさせています。リンゴとカニに関係するキャラクターであるため、飾り枠の四隅はカニをイメージした装飾となっています。' },
+        { src: 'images/31.png',  alt: 'キャラクターシート',  note: '2024年3月 · 合計約15時間 / ibisPaint',    caption: '見やすさを第一とし、挿絵によって可愛さを演出しました。Xのサムネイルの仕組みを利用し、右のイラストからタッチすることでキャラクターシートが広がる構成にすることで目新しさと面白さを追求しました。' },
+        { src: 'images/231.png', alt: 'キャラクターシート',  note: '2024年3月 · 合計約15時間 / ibisPaint',    caption: '見やすさを第一とし、挿絵によって可愛さを演出しました。Xのサムネイルの仕組みを利用し、右のイラストからタッチすることでキャラクターシートが広がる構成にすることで目新しさと面白さを追求しました。' },
+        { src: 'images/232.png', alt: 'キャラクターシート',  note: '2024年3月 · 合計約15時間 / ibisPaint',    caption: '見やすさを第一とし、挿絵によって可愛さを演出しました。Xのサムネイルの仕組みを利用し、右のイラストからタッチすることでキャラクターシートが広がる構成にすることで目新しさと面白さを追求しました。' },
+        { src: 'images/233.png', alt: 'キャラクターシート',  note: '2024年3月 · 合計約15時間 / ibisPaint',    caption: '見やすさを第一とし、挿絵によって可愛さを演出しました。Xのサムネイルの仕組みを利用し、右のイラストからタッチすることでキャラクターシートが広がる構成にすることで目新しさと面白さを追求しました。' },
+        { src: 'images/234.png', alt: 'キャラクターシート',  note: '2024年3月 · 合計約15時間 / ibisPaint',    caption: '見やすさを第一とし、挿絵によって可愛さを演出しました。Xのサムネイルの仕組みを利用し、右のイラストからタッチすることでキャラクターシートが広がる構成にすることで目新しさと面白さを追求しました。' },
+        { src: 'images/50.png',  alt: 'キャラクターシート',  note: '2025年1月 · 2時間26分 / ibisPaint X',    caption: '「同じ轍を踏む」という言葉から、雪の足跡を強調し、本編内にて気が触れることから不思議な雰囲気の表現を目指しました。' },
+        { src: 'images/49.png',  alt: 'キャラクターシート',  note: '2025年1月 · 2時間16分 / ibisPaint X',    caption: '「同じ轍を踏む」という言葉から、雪の足跡を強調し、本編内にて気が触れることから不思議な雰囲気の表現を目指しました。' },
+        { src: 'images/cs2.png', alt: 'オスカー・ヴェンデッタ キャラクターシート', note: '2024年11月 · 約6時間 / ibisPaint X', caption: '統一感を持たせつつ、可読性を失わないようにデザインしました。' },
+        { src: 'images/236.png', alt: 'キャラクターシート(合作)', note: '2024年6月 · 合計約26時間 / ibisPaint X', caption: '友人との共同制作です。双子で1つのシートとしたため、統一感が出るよう互いに絵柄を寄せるなど工夫しました。映画をモチーフとした物語であるため、映画のDVDジャケット風にデザインしました。主にレイアウトや挿絵を自分が担当し、文章や立ち絵の片方を友人が担当しました。' },
+        { src: 'images/272.jpg', gallery: ['images/272.jpg','images/273.jpg','images/274.jpg','images/277.png','images/278.png','images/279.png','images/280.png','images/281.png','images/282.png','images/283.png'], alt: 'デザイン制作過程', note: '/ iPhone · ibisPaint X', caption: 'キャラクターデザイン制作過程。最も可愛らしいデザインになるよう、2人で案を出し合いました。' },
+        { src: 'images/275.png', gallery: [
+            { src: 'images/275.png', caption: '扉絵の指示書き。投稿先であるXのサムネイルで手を合わせているような構図にするため、レイアウトにこだわりました。' },
+            { src: 'images/276.png', caption: '青部分が自分、赤部分が友人の描画箇所です。' },
+            { src: 'images/235.png', caption: '扉絵は2枚に分かれています。青い子は実は人ではないため、これは赤い子のキャラクターシートであるという意図から、赤い子のページにしかタイトルの文字がありません。' },
+            { src: 'images/335.png', caption: '扉絵は2枚に分かれています。青い子は実は人ではないため、これは赤い子のキャラクターシートであるという意図から、赤い子のページにしかタイトルの文字がありません。' },
+            { src: 'images/336.png', caption: '扉絵は2枚に分かれています。青い子は実は人ではないため、これは赤い子のキャラクターシートであるという意図から、赤い子のページにしかタイトルの文字がありません。' },
+          ], alt: 'キャラクターシート制作過程', note: '/ ibisPaint X · iPhone', caption: '' },
+      ]
+    },
+    {
+      cat:   '一次創作',
+      title: '一次創作',
+      desc:  'オリジナルキャラクターを用いた自主制作イラストです。',
+      cover: 'images/08.png',
+      images: [
+
+        { src: 'images/08.png',  alt: '一次創作',                         note: '2025年3月 · 3時間4分 / ibisPaint X',                 caption: '眠っているようにも見える一方で、青白い顔色や力の抜けた姿によって、死を感じさせる表現を目指しました。また、死因や生前の行動を画面の中に散りばめることで、人物の背景を読み取れるようにしています。' },
+        { src: 'images/47.png',  video: 'videos/jishu-tegaki.mp4', alt: '一次創作動画', pos: 'top', note: '2023年12月 · 約10時間 / ibisPaint X · After Effects', caption: '' },
+        { src: 'images/242.png', alt: '立ち絵',                          note: '2025年10月 · 3時間9分 / ibisPaint X',                caption: '妖精とバレエをモチーフにした魔法少女です。装飾が多い一方で、軽やかな印象に仕上がるよう工夫しました。' },
+        { src: 'images/243.png', alt: '一次創作',                        note: '2025年10月 · 4時間36分 / ibisPaint X',               caption: '映画のポスターをイメージして制作しました。' },
+        { src: 'images/29.png',  alt: '「世界が平和になりますように」',    note: '2024年2月 · 45分 / ibisPaint X',                      caption: '首を切られ死亡した、平和のために戦った魔法少女。青空の下 平和の象徴である鳩を赤く染め、爽やかな色合いの中に不穏さを演出しました。' },
+        { src: 'images/52.png',  alt: '一次創作',                        note: '2024年3月 · 約3時間 / ibisPaint X',                  caption: '俯瞰気味の構図にすることで、広がるマントや幾重にも重なるレースのドレスが美しく見えるよう意識しました。また、画面全体に高級感や荘厳さを感じられるような雰囲気づくりを目指しています。' },
+        { src: 'images/59.png',  alt: '「❗️」',                          note: '2023年8月 · 5時間30分 / ibisPaint X',                caption: '不死身の体を得た魔法少女のイラスト。ダイナミックさを全面に出せるよう心がけました。' },
+        { src: 'images/228.png', gallery: [
+            { src: 'images/228.png', caption: '「前世」軍人の前世を持つ魔法少女のキャラクター。長い髪を炎に見立て、思い出すことのない過去を鉄条網で隠すような構図にしました。（2024年2月）' },
+            { src: 'images/71.png',  caption: '「前世」制作途中（加工前）。' },
+            { src: 'images/227.png', caption: '「前世」ラフ。' },
+            { src: 'images/226.png', caption: '軍人を前世に持つ魔法少女の立ち絵。戦闘系の魔法を扱うため、大きく動いた際に見栄えするよう揺れ物の多いデザインにしました。魔法少女らしいフリルとリボンに包まれていながらも、軍人の付けるドッグタグや、モチーフの一つであるジャンヌ・ダルクを彷彿とさせる甲冑イメージの靴など、前世と関連する要素を入れ込みました。' },
+            { src: 'images/225.png', caption: '立ち絵の色分けをした線画。' },
+            { src: 'images/224.png', caption: 'キャラクターの三面図。' },
+            { src: 'images/230.png', caption: '裏キャラクターシートの抜粋。ソーシャルゲーム風のレイアウトを意識しました。' },
+            { src: 'images/44.png',  caption: '裏キャラクターシートの抜粋。ソーシャルゲーム風のレイアウトを意識しました。' },
+          ], alt: '自主制作', note: '2023年〜2024年 / ibisPaint X', caption: '創作企画応募用キャラクターの自主制作イラスト集。全8点。' },
+        { src: 'images/thumb-jishu-haikei.jpg', video: 'videos/jishu-haikei.mp4', alt: '自主制作 背景動画', note: '/ ibisPaint X · After Effects', caption: '自主制作の背景アニメーション映像。' },
+      ]
+    },
+    {
+      cat:   '卒業制作（高校）',
+      title: '「ささやかな幸せに囲まれるための提案」',
+      desc:  '高校の卒業制作です。制作期間：2023年4〜11月 / 制作時間：約400時間\nオリジナルキャラクターのイヌをVtuberの推しに見立て、Live2Dをメインに待機画面・OP風手書きアニメーション・グッズを制作しました。一瞬見るだけで終わりではなく楽しめる空間を目指し、1分40秒の手描きアニメーションや無料配布のフレークシールも併せて制作しています。\n制作物：Live2D・手描きアニメーション・B2イラスト×2・羊毛フェルト・フレークシール・アイロンプリントTシャツ×3',
+      cover: 'images/thumb-live2d-full.jpg',
+      images: [
+        { src: 'images/thumb-live2d-full.jpg',  video: 'videos/live2d-full.mp4', label: '完成品', alt: '卒業制作 Live2D', note: '2023年5月〜8月 · 約220時間 / ibisPaint X · Live2D', caption: '「自分に合わせて犬が動いたらワクワクする」という思いから始まり、可愛さを最大限引き出せるよう追求しました。' },
+        { src: 'images/thumb-sotsusei-animation.jpg',  video: 'videos/sotsusei-animation.mp4', label: 'アニメーション動画', alt: '待機画面・OP風手書きアニメーション', note: '2023年6〜11月 / ibisPaint X · After Effects', caption: 'もちもちふわふわとしたかわいさを表現できるよう工夫しました。' },
+        { src: 'images/thumb-live2d-motion.jpg',  video: 'videos/live2d-motion.mp4', label: 'モーション', alt: 'ハンドジェスチャーへの対応', note: 'ハンドジェスチャー対応 / Live2D', caption: '立てた指の本数に応じた3種類の表情と、マルを作ることでウインク、親指と小指を立てることで手を振るモーションを実装し、更なる驚きを追求しました。' },
+        { src: 'images/thumb-live2d-shisakuhin.jpg',  video: 'videos/live2d-shisakuhin.mp4', label: '試作品', alt: '試作品', note: '試作品 / ibisPaint X · Live2D', caption: '一度試作品を作った後に本制作へと進みました。可動域の拡大・口パク・手のトラッキング・物理演算によるモチモチ感・自然な動き・ハンドジェスチャー対応モーションなどの改善を加えています。' },
+        { src: 'images/58.png',  alt: '制作途中', note: '/ ibisPaint X', caption: '背景をパステルカラーにする方向に決めてから、色味などを工夫して改善しました。' },
+        { src: 'images/270.jpg', alt: '羊毛フェルト', note: '/ iPhone', caption: '' },
+        { src: 'images/240.png', alt: 'プリントシャツのデータ', note: '/ ibisPaint X', caption: '' },
+        { src: 'images/241.png', alt: 'プリントシャツのデータ', note: '/ ibisPaint X', caption: '' },
+        { src: 'images/239.png', alt: 'フレークシールの案内', note: '/ ibisPaint X', caption: '' },
+      ]
+    },
+    {
+      cat:   '友人への誕生日プレゼント',
+      title: '友人への誕生日プレゼント',
+      desc:  '友人の誕生日に贈った、フル尺フルカラー・総作画枚数280枚の手描きアニメーション映像です。制作時期：2024年2〜3月 / 制作時間：55時間。',
+      cover: 'images/69.png',
+      images: [
+        { src: 'images/thumb-tegaki-douga.jpg', video: 'videos/tegaki-douga.mp4', alt: '友人への誕生日プレゼント 動画', note: '2024年2〜3月 · 55時間 / ibisPaint X · After Effects', caption: 'ループを基調とした世界観から、曲中に3回あるサビは同じ構成になっています。繰り返しで飽きないようアニメーションを工夫し、またループのたびに少しずつ違って狂っていく日常を表現するため、2番のサビでは一部差分を、ラストのサビでは差分を両方使い画面に変化を出しています。ループの間隔を崩すことで不安定感を演出し、画面のノイズやパペットピンによるアニメーションの演出を入れ込みました。総作画枚数280枚。' },
+        { src: 'images/323.png', gallery: ['images/323.png','images/324.png','images/325.png'], alt: '動画の抜粋', note: '/ ibisPaint X · After Effects', caption: '動画の抜粋。全3点。' },
+      ]
+    },
+    {
+      cat:   '委託イラスト',
+      title: '有償依頼',
+      desc:  '依頼を受けて描いたイラストです。これまで800件以上を納品しています。',
+      cover: 'images/204.gif',
+      images: [
+
+        { src: 'images/204.gif', alt: '有償依頼（アニメーション）', note: '人物1人あたり約1時間 / ibisPaint X', caption: '' },
+        { src: 'images/221.png', alt: '有償依頼', note: '動物 · 約10分 / ibisPaint X', caption: '' },
+        { src: 'images/211.gif', alt: '有償依頼（アニメーション）', note: '人物1人あたり約1時間 / ibisPaint X', caption: '' },
+        { src: 'images/213.png', alt: '有償依頼', note: '動物 · 約10分 / ibisPaint X', caption: '' },
+        { src: 'images/205.gif', alt: '有償依頼（アニメーション）', note: '人物1人あたり約1時間 / ibisPaint X', caption: '' },
+        { src: 'images/220.png', alt: '有償依頼', note: '動物 · 約10分 / ibisPaint X', caption: '' },
+        { src: 'images/206.gif', alt: '有償依頼（アニメーション）', note: '人物1人あたり約1時間 / ibisPaint X', caption: '' },
+        { src: 'images/219.png', alt: '有償依頼', note: '動物 · 約10分 / ibisPaint X', caption: '' },
+        { src: 'images/207.gif', alt: '有償依頼（アニメーション）', note: '人物1人あたり約1時間 / ibisPaint X', caption: '' },
+        { src: 'images/218.png', alt: '有償依頼', note: '動物 · 約10分 / ibisPaint X', caption: '' },
+        { src: 'images/208.gif', alt: '有償依頼（アニメーション）', note: '人物1人あたり約1時間 / ibisPaint X', caption: '' },
+        { src: 'images/215.png', alt: '有償依頼', note: '動物 · 約10分 / ibisPaint X', caption: '' },
+        { src: 'images/209.gif', alt: '有償依頼（アニメーション）', note: '人物1人あたり約1時間 / ibisPaint X', caption: '' },
+        { src: 'images/216.png', alt: '有償依頼', note: '動物 · 約10分 / ibisPaint X', caption: '' },
+        { src: 'images/210.gif', alt: '有償依頼（アニメーション）', note: '人物1人あたり約1時間 / ibisPaint X', caption: '' },
+        { src: 'images/217.png', alt: '有償依頼', note: '動物 · 約10分 / ibisPaint X', caption: '' },
+        { src: 'images/212.gif', alt: '有償依頼（アニメーション）', note: '人物1人あたり約1時間 / ibisPaint X', caption: '' },
+        { src: 'images/222.png', alt: '有償依頼', note: '動物 · 約10分 / ibisPaint X', caption: '' },
+      ]
+    },
+    {
+      cat:   '二次創作',
+      title: '二次創作',
+      desc:  '原作の世界観・キャラクターへのリスペクトを大切にしながら、自分なりの解釈やストーリーを加えた作品群です。',
+      cover: 'images/116.png',
+      images: [
+        { src: 'images/116.png', alt: '二次創作(Limbus Company)',          note: '2024年4月 · 約2時間 / ibisPaint X',     caption: '' },
+        { src: 'images/254.jpg', alt: '二次創作(原神)',                     note: '2023年8月 · 合計6時間 / ibisPaint X',  caption: '次第に大きくなっていく死体と、それへの非日常感が薄れて興味をなくしていくさまを表現しました。' },
+        { src: 'images/255.jpg', alt: '二次創作(原神)',                     note: '2023年8月 · 合計6時間 / ibisPaint X',  caption: '次第に大きくなっていく死体と、それへの非日常感が薄れて興味をなくしていくさまを表現しました。' },
+        { src: 'images/256.jpg', alt: '二次創作(原神)',                     note: '2023年8月 · 合計6時間 / ibisPaint X',  caption: '次第に大きくなっていく死体と、それへの非日常感が薄れて興味をなくしていくさまを表現しました。' },
+        { src: 'images/257.jpg', alt: '二次創作(原神)',                     note: '2021年12月 · 11時間45分 / ibisPaint X', caption: '時間をかけて丁寧に描くことと、画面を埋めることを軸として、色が調和するよう工夫しました。' },
+        { src: 'images/258.jpg', alt: '二次創作(原神)',                     note: '2022年2月 · 4時間30分 / ibisPaint X',  caption: '好きな衣装の細かなディテールを見せるために、衣装交換によってそれを強調しました。' },
+        { src: 'images/259.jpg', alt: '二次創作(原神)',                     note: '2022年 · 約7時間 / ibisPaint X',        caption: '' },
+        { src: 'images/260.jpg', alt: '二次創作(原神)',                     note: '2022年1月 · 11時間43分 / ibisPaint X', caption: 'キャラクターたちの関係性から、あるかもしれないワンシーンを想像し描きました。' },
+        { src: 'images/114.png', alt: '二次創作(あんさんぶるスターズ！)',   note: '2024年4月 · 約2時間 / ibisPaint X',    caption: '' },
+        { src: 'images/115.gif', alt: '二次創作(Limbus Company)',           note: '/ ibisPaint X',                        caption: '' },
+      ]
+    },
+    {
+      cat:   '学校課題',
+      title: '学校課題',
+      desc:  'ゲーム制作・アニメーション・お題イラストなど、授業課題として制作した作品群です。',
+      cover: 'images/321.jpg',
+      images: [
+        { src: 'images/thumb-neko-escape.jpg', video: 'videos/neko-escape.mp4',       alt: '猫からの脱出 プレイ動画',  note: '2025年7月 / Unity',       caption: '用意されたオブジェクト・素材・機能を用いてUnityで制作したプラットフォームゲームです。障害物の位置やステージの形状など、すべてのオブジェクトに役割を持たせ、正解のルートが一つではない仕上がりになるよう工夫しました。ジャンプするとステージが回転するスクリプト（実装にはAIを活用）とブロックの素材は自作しました。' },
+        { src: 'images/thumb-gogo-imomushikun.jpg', video: 'videos/gogo-imomushikun.mp4', alt: 'ゴーゴーいもむしくん プレイ動画', note: '2024年12月 / Unity', caption: 'Unityで制作した、敵を避けながらポイントを集めるゲームです。規則的に動く敵とプレイヤーを追従する敵を組み合わせ、走り回ることを促しました。主人公の3Dモデルは自作、それ以外はネット上のアセットを使用しています。' },
+        { src: 'images/thumb-animation-kadai.jpg', video: 'videos/animation-kadai.mp4',  alt: 'アニメーション課題',       note: '2023年1月 · 13時間55分 · 96枚 / ibisPaint X', caption: '黒い丸を右から左へ移動させるという課題。丸が犬になり、女性に持ち上げて投げられるアニメーションを描きました。なめらかな動きになるよう工夫しました。' },
+        { src: 'images/263.png', alt: '『日本』',                     note: '2024年5月 · 40分 / ibisPaint X',              caption: 'まず、日本の絵描きが描くものといえばセーラー服だと感じ、次に90年代風の絵柄やサブカルチャー文化も日本独自のものであると感じたため、ギャルゲー風のイラストを描きました。また、コンビニは世界各地にありますが、日本語が書いてあるのは日本のコンビニだけであるという意図も含んでいます。' },
+        { src: 'images/265.png', alt: '『詩』',                       note: '2024年5月 / ibisPaint X',                    caption: '手直し前の作品です。' },
+        { src: 'images/266.png', alt: '『詩』',                       note: '2024年5月 · 32分 / ibisPaint X',             caption: '詩の中の「光化学の街」「影法師」「どこかへと歩く」などという単語から、多方からの光に照らされてできた影と、足元をシルエットにすることでどの方向を向いているか分からない表現にしました。' },
+        { src: 'images/267.png', alt: '『相反する二つの要素』',        note: '2024年5月 · 26分 / ibisPaint X',             caption: '二枚組で制作する課題。有名なことわざの「井の中の蛙」と「大海」は相反するものであると考え、また、時折そこに続くと言われる「されど空の青さを知る」が前者とまた相反するものになることから、海にも空にも見える絵を繋げられるような構成にしました。' },
+        { src: 'images/268.png', alt: '『相反する二つの要素』',        note: '2024年5月 · 26分 / ibisPaint X',             caption: '二枚組で制作する課題。有名なことわざの「井の中の蛙」と「大海」は相反するものであると考え、また、時折そこに続くと言われる「されど空の青さを知る」が前者とまた相反するものになることから、海にも空にも見える絵を繋げられるような構成にしました。' },
+        { src: 'images/261.png', alt: '『1000年後』',                  note: '2024年5月 / ibisPaint X',                    caption: '手直し前の作品です。' },
+        { src: 'images/269.png', alt: '『1000年後』',                  note: '2024年5月 · 52分 / ibisPaint X',             caption: '1000年後に残るものはなんだろうと考えた時、それは昔から今も残る美術品だと思いました。そして、科学技術が発展しているという予想から名画の形を取ったAIの存在を、そして生成AIに「モナリザの絵の近くに立つモナリザのような人」を出力させた構図を参考に描きました。' },
+      ]
+    },
+    {
+        cat: 'video',
+        title: 'SNSイラスト動画',
+        desc: 'イラストの描き方・テクニックを発信する活動を始めました。技法書の多くはある程度の理解を前提としていたり、「これをやればいい感じになる」という結果だけを伝える説明が中心ですが、私は仕組みや根拠から理解してもらうことを大切にしています。ユーザーと直接やりとりして生の声を聞き、実際の疑問や躓きを動画に反映することを心がけています。',
+        cover: 'images/305.jpg',
+        cta: { text: '続きはInstagramで', url: 'https://www.instagram.com/ewokaku_neko?igsh=cnN6cTkzZnZldDVt&utm_source=qr' },
+        images: [
+        { src: 'images/thumb-sns-eiko.jpg', video: 'videos/sns-eiko.mp4', alt: 'SNSイラスト動画', note: '/ ibisPaint X', caption: 'SNSイラスト動画。' },
+        { src: 'images/thumb-sns-mizuiro.jpg', alt: 'SNSイラスト動画', note: '/ ibisPaint X', caption: 'SNSイラスト動画。' },
+        { src: 'images/thumb-sns-gyakkou.jpg', alt: 'SNSイラスト動画', note: '/ ibisPaint X', caption: 'SNSイラスト動画。' },
+        { src: 'images/thumb-sns-hikari2.jpg', alt: 'SNSイラスト動画', note: '/ ibisPaint X', caption: 'SNSイラスト動画。' },
+        { src: 'images/thumb-sns-kougen-kimero.jpg', alt: 'SNSイラスト動画', note: '/ ibisPaint X', caption: 'SNSイラスト動画。' },
+        { src: 'images/thumb-sns-kageneko.jpg', alt: 'SNSイラスト動画', note: '/ ibisPaint X', caption: 'SNSイラスト動画。' },
+        { src: 'images/thumb-sns-ironchu.jpg', alt: 'SNSイラスト動画', note: '/ ibisPaint X', caption: 'SNSイラスト動画。' },
+        { src: 'images/thumb-sns-douga2.jpg', alt: 'SNSイラスト動画', note: '/ ibisPaint X', caption: 'SNSイラスト動画。' },
+        { src: 'images/thumb-sns-senga-lesson.jpg', alt: 'SNSイラスト動画', note: '/ ibisPaint X', caption: 'SNSイラスト動画。' },
+        { src: 'images/thumb-sns-kido-moji.jpg', alt: 'SNSイラスト動画', note: '/ ibisPaint X', caption: 'SNSイラスト動画。' },
+        { src: 'images/thumb-sns-45.jpg', alt: 'SNSイラスト動画', note: '/ ibisPaint X', caption: 'SNSイラスト動画。' },
+        { src: 'images/thumb-sns-egao1.jpg', alt: 'SNSイラスト動画', note: '/ ibisPaint X', caption: 'SNSイラスト動画。' },
+        { src: 'images/thumb-sns-egao2.jpg', alt: 'SNSイラスト動画', note: '/ ibisPaint X', caption: 'SNSイラスト動画。' },
+        ]
+      },
+  ];
+
+  /* ============================================================
+     メインページ：プロジェクトカード生成
+     カードをクリック → ギャラリーオーバーレイが開く
+  ============================================================ */
+  const container = document.getElementById('projects');
+
+  PROJECTS.forEach((proj, pi) => {
+    const card = document.createElement('article');
+    card.className = 'proj-card';
+    card.innerHTML = `
+      <div class="proj-card-img">
+        <img src="${proj.cover}" alt="${proj.title}" loading="lazy" />
+        <div class="proj-card-hover">
+          <span>${proj.images.length} works — 開く</span>
+        </div>
+      </div>
+      <div class="proj-card-info">
+        <h3 class="proj-card-title">${proj.title}</h3>
+        <p class="proj-card-count">${proj.images.length} works</p>
+      </div>
+    `;
+    card.addEventListener('click', () => openGallery(pi));
+    container.appendChild(card);
+  });
+
+  /* ============================================================
+     ギャラリーオーバーレイ（セクション詳細）
+  ============================================================ */
+  const gal        = document.getElementById('gal');
+  const galClose   = document.getElementById('galClose');
+  const galTitle   = document.getElementById('galTitle');
+  const galDesc    = document.getElementById('galDesc');
+  const galGrid    = document.getElementById('galGrid');
+
+  let galProj = 0;
+
+  function openGallery(pi) {
+    galProj = pi;
+    const proj = PROJECTS[pi];
+    galTitle.textContent = proj.title;
+    galDesc.innerHTML    = proj.desc.replace(/\n/g,'<br>');
+
+    // 世界観ボックス（表／裏）
+    const galWorldview = document.getElementById('galWorldview');
+    galWorldview.innerHTML = '';
+    if (proj.worldview) {
+      galWorldview.innerHTML =
+        `<div class="gal-world">
+          <div class="gal-world-card gal-world-omote">
+            <span class="gal-world-label">表の世界観</span>
+            <p class="gal-world-body">${proj.worldview.omote}</p>
+          </div>
+          <div class="gal-world-card gal-world-ura">
+            <span class="gal-world-label">裏の世界観</span>
+            <p class="gal-world-body">${proj.worldview.ura}</p>
+          </div>
+        </div>`;
+      galWorldview.style.display = '';
+    } else {
+      galWorldview.style.display = 'none';
+    }
+
+    // highlights ボックス
+    const galHighlights = document.getElementById('galHighlights');
+    galHighlights.innerHTML = '';
+    if (proj.highlights) {
+      galHighlights.innerHTML = proj.highlights.map(h =>
+        `<div class="gal-hl-item">
+          <div class="gal-hl-num">${h.num}</div>
+          <div class="gal-hl-content"><strong class="gal-hl-title">${h.title}</strong><p class="gal-hl-body">${h.body}</p></div>
+        </div>`
+      ).join('');
+      galHighlights.style.display = '';
+    } else {
+      galHighlights.style.display = 'none';
+    }
+
+    galGrid.innerHTML = '';
+    // SNSイラスト動画は縦長3列レイアウト
+    if (proj.title === 'SNSイラスト動画') {
+      galGrid.classList.add('gal-grid--portrait');
+    } else {
+      galGrid.classList.remove('gal-grid--portrait');
+    }
+    proj.images.forEach((img, ii) => {
+      const fig = document.createElement('figure');
+      fig.className = 'gal-fig';
+      const icon = img.gallery ? '⊞' : (img.video ? '▶' : '+');
+      const posterSrc = img.src || '';
+      const labelDiv = img.label ? `<div class="gal-label">${img.label}</div>` : '';
+      const badge = img.gallery ? `<span class="gal-badge">${img.gallery.length}点</span>`
+                  : img.video   ? `<span class="gal-badge">動画</span>`
+                  : '';
+      const titleDiv = (img.gallery || proj.stepTitles) ? `<div class="gal-title">${img.alt}</div>` : '';
+      const posStyle = img.pos ? ` style="object-position:${img.pos}"` : '';
+      fig.innerHTML = `<img src="${posterSrc}" alt="${img.alt}" loading="lazy"${posStyle} /><div class="gal-overlay"><span>${icon}</span></div>${titleDiv}${labelDiv}${badge}`;
+
+      // ホバープレビュー（動画エントリのみ）
+      if (img.video) {
+        let hoverVid = null;
+        fig.addEventListener('mouseenter', () => {
+          if (!hoverVid) {
+            hoverVid = document.createElement('video');
+            hoverVid.src = img.video;
+            hoverVid.muted = true;
+            hoverVid.loop = true;
+            hoverVid.playsInline = true;
+            hoverVid.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .25s;pointer-events:none;';
+            fig.appendChild(hoverVid);
+          }
+          hoverVid.play().catch(() => {});
+          hoverVid.style.opacity = '1';
+        });
+        fig.addEventListener('mouseleave', () => {
+          if (hoverVid) {
+            hoverVid.pause();
+            hoverVid.currentTime = 0;
+            hoverVid.style.opacity = '0';
+          }
+        });
+      }
+
+      fig.addEventListener('click', () => {
+        const entry = PROJECTS[pi].images[ii];
+        const proj  = PROJECTS[pi];
+        if (entry.gallery) { openSubGal(entry); }
+        else if (!entry.video && proj.cta) { openIgConfirm(proj.cta.url); }
+        else { openLb(pi, ii); }
+      });
+      galGrid.appendChild(fig);
+    });
+
+    // CTA ボタン（proj.cta がある場合）
+    const existingCta = document.getElementById('gal-cta-btn');
+    if (existingCta) existingCta.remove();
+    if (proj.cta) {
+      const ctaBtn = document.createElement('a');
+      ctaBtn.id = 'gal-cta-btn';
+      ctaBtn.href = proj.cta.url;
+      ctaBtn.target = '_blank';
+      ctaBtn.rel = 'noopener noreferrer';
+      ctaBtn.className = 'gal-cta-btn';
+      ctaBtn.textContent = proj.cta.text + ' →';
+      galGrid.insertAdjacentElement('beforebegin', ctaBtn);
+    }
+
+    gal.classList.add('open');
+    gal.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeGallery() {
+    gal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  galClose.addEventListener('click', closeGallery);
+  document.getElementById('galCloseBottom').addEventListener('click', closeGallery);
+  gal.addEventListener('click', e => { if (e.target === gal) closeGallery(); });
+
+  /* ============================================================
+     ライトボックス
+  ============================================================ */
+  const lb       = document.getElementById('lb');
+  const lbImg    = document.getElementById('lbImg');
+  const lbCap    = document.getElementById('lbCaption');
+  const lbThumbs = document.getElementById('lbThumbs');
+  const lbPrev   = document.getElementById('lbPrev');
+  const lbNext   = document.getElementById('lbNext');
+  const lbX      = document.getElementById('lbX');
+
+  let curProj = 0, curIdx = 0;
+
+  function openLb(pi, ii) {
+    curProj = pi;
+    curIdx  = ii;
+    renderLb();
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  const lbVid = document.getElementById('lbVid');
+
+  function stopLbVideo() {
+    lbVid.pause();
+    lbVid.removeAttribute('src');
+    lbVid.load();
+  }
+
+  function closeLb() {
+    stopLbVideo();
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function renderLb() {
+    const proj = PROJECTS[curProj];
+    const img  = proj.images[curIdx];
+
+    if (img.video) {
+      // 動画エントリ
+      lbImg.style.display = 'none';
+      lbVid.style.display = '';
+      stopLbVideo();
+      lbVid.src    = img.video;
+      lbVid.muted  = !!img.muted;
+      lbVid.poster = img.src || '';
+      lbVid.load();
+      lbVid.play().catch(() => {});
+    } else {
+      // 画像エントリ
+      stopLbVideo();
+      lbVid.style.display = 'none';
+      lbImg.style.display = '';
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+    }
+
+    lbCap.textContent = `${img.alt}　${img.note}`;
+    const lbDetail = document.getElementById('lbDetail');
+    lbDetail.innerHTML = (img.caption || '').replace(/\n/g, '<br>');
+    lbDetail.style.display = img.caption ? '' : 'none';
+    lbDetail.scrollTop = 0;
+
+    // サムネイルストリップ
+    lbThumbs.innerHTML = '';
+    proj.images.forEach((im, i) => {
+      const t = document.createElement('button');
+      t.className = 'lb-thumb' + (i === curIdx ? ' active' : '');
+      // 動画エントリもポスター画像をサムネとして使う
+      const thumbSrc = im.src || '';
+      t.innerHTML = `<img src="${thumbSrc}" alt="${im.alt}" />${im.video ? '<span class="lb-thumb-play">▶</span>' : ''}`;
+      t.addEventListener('click', () => { curIdx = i; renderLb(); });
+      lbThumbs.appendChild(t);
+    });
+
+    // 矢印表示
+    lbPrev.style.opacity = proj.images.length > 1 ? '1' : '0';
+    lbNext.style.opacity = proj.images.length > 1 ? '1' : '0';
+  }
+
+  function navigate(dir) {
+    const len = PROJECTS[curProj].images.length;
+    curIdx = (curIdx + dir + len) % len;
+    renderLb();
+  }
+
+  lbX.addEventListener('click', closeLb);
+  lbPrev.addEventListener('click', () => navigate(-1));
+  lbNext.addEventListener('click', () => navigate(1));
+  lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape')      closeLb();
+    if (e.key === 'ArrowLeft')   navigate(-1);
+    if (e.key === 'ArrowRight')  navigate(1);
+  });
+
+  /* ============================================================
+     ナビ スクロール
+  ============================================================ */
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', scrollY > 80);
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* スムーススクロール */
+  document.querySelectorAll('a[href^="#"]').forEach(a =>
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (!t) return;
+      e.preventDefault();
+      t.scrollIntoView({ behavior: 'smooth' });
+    })
+  );
+
+  /* ============================================================
+     レーダーチャート アニメーション
+     スクロールでチャートが見えた瞬間、0 → MAX にアニメーション
+  ============================================================ */
+  (function () {
+    const svg = document.getElementById('radarSvg');
+    if (!svg) return;
+
+    // 軸の角度（度）: 上から時計回り
+    const axes = [-90, -18, 54, 126, 198];
+    // 各軸の値（0〜1） — PDF準拠でフル
+    const targets = [1, 1, 1, 1, 1];
+    const R = 100;
+
+    function pt(angleDeg, val) {
+      const rad = angleDeg * Math.PI / 180;
+      return [R * val * Math.cos(rad), R * val * Math.sin(rad)];
+    }
+
+    const fillEl = document.getElementById('radarFill');
+    const dots   = axes.map((_, i) => document.getElementById('dot' + i));
+
+    function draw(progress) {
+      const pts = axes.map((a, i) => pt(a, targets[i] * progress));
+      fillEl.setAttribute('points', pts.map(p => p.map(n => n.toFixed(2)).join(',')).join(' '));
+      dots.forEach((d, i) => {
+        d.setAttribute('cx', pts[i][0].toFixed(2));
+        d.setAttribute('cy', pts[i][1].toFixed(2));
+      });
+    }
+
+    // 初期状態（全部0）
+    draw(0);
+
+    let animated = false;
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && !animated) {
+        animated = true;
+        const duration = 1400;
+        const t0 = performance.now();
+        function tick(now) {
+          const elapsed = now - t0;
+          const t = Math.min(elapsed / duration, 1);
+          // easeOutBack（少しはずんでぐわーん感）
+          const c1 = 1.70158, c3 = c1 + 1;
+          const ease = t === 1 ? 1 : 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+          draw(Math.max(0, ease));
+          if (t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+    }, { threshold: 0.25 });
+
+    observer.observe(svg);
+  })();
+  
+  // ── Sub-Gallery ──────────────────────────────
+  (function () {
+    const subgal      = document.getElementById('subgal');
+    const subgalGrid  = document.getElementById('subgalGrid');
+    const subgalTitle = document.getElementById('subgalTitle');
+    const subgalNote  = document.getElementById('subgalNote');
+    const subgalLb      = document.getElementById('subgalLb');
+    const subgalLbImg   = document.getElementById('subgalLbImg');
+    const subgalLbVid   = document.getElementById('subgalLbVid');
+    const subgalLbCnt   = document.getElementById('subgalLbCounter');
+    const subgalLbCap   = document.getElementById('subgalLbCaption');
+
+    // Instagram 確認モーダル
+    const igConfirm = document.getElementById('ig-confirm');
+    const igConfirmLink = document.getElementById('ig-confirm-link');
+    window.openIgConfirm = function(url) {
+      igConfirmLink.href = url;
+      igConfirm.classList.add('open');
+    };
+    document.getElementById('ig-confirm-cancel').addEventListener('click', () => {
+      igConfirm.classList.remove('open');
+    });
+    igConfirm.addEventListener('click', e => {
+      if (e.target === igConfirm) igConfirm.classList.remove('open');
+    });
+
+    let sgImages = [], sgIdx = 0;
+
+    window.openSubGal = function (imgEntry) {
+      sgImages = imgEntry.gallery;
+      subgalTitle.textContent = imgEntry.alt + '（全' + sgImages.length + '点）';
+      subgalNote.textContent  = imgEntry.note || '';
+      subgalGrid.innerHTML = '';
+      sgImages.forEach(function (item, i) {
+        const src = typeof item === 'string' ? item : item.src;
+        const vid = typeof item === 'string' ? null : (item.video || null);
+        const fig = document.createElement('figure');
+        if (vid) {
+          const v = document.createElement('video');
+          v.src = vid; v.poster = src; v.muted = true; v.loop = true; v.playsInline = true;
+          fig.addEventListener('mouseenter', function () { v.play().catch(function () {}); });
+          fig.addEventListener('mouseleave', function () { v.pause(); v.currentTime = 0; });
+          fig.appendChild(v);
+          const badge = document.createElement('span');
+          badge.className = 'sg-vid-badge'; badge.textContent = '▶';
+          fig.appendChild(badge);
+        } else {
+          const imgEl = document.createElement('img');
+          imgEl.src = src; imgEl.loading = 'lazy'; imgEl.alt = imgEntry.alt;
+          fig.appendChild(imgEl);
+        }
+        fig.addEventListener('click', function () { openSgLb(i); });
+        subgalGrid.appendChild(fig);
+      });
+      subgal.classList.add('open');
+      subgal.scrollTop = 0;
+      document.body.style.overflow = 'hidden';
+    };
+
+    document.getElementById('subgalX').addEventListener('click', function () {
+      subgal.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+
+    function openSgLb(i) {
+      sgIdx = i;
+      renderSgLb();
+      subgalLb.classList.add('open');
+    }
+    function closeSgLb() {
+      subgalLb.classList.remove('open');
+      subgalLbVid.pause();
+      subgalLbVid.src = '';
+    }
+    function renderSgLb() {
+      const item = sgImages[sgIdx];
+      const src  = typeof item === 'string' ? item : item.src;
+      const cap  = typeof item === 'string' ? '' : (item.caption || '');
+      const vid  = typeof item === 'string' ? null : (item.video || null);
+      subgalLbVid.pause();
+      // フェードアウト → 内容更新 → フェードイン
+      const activeEl = subgalLbImg.style.display !== 'none' ? subgalLbImg : subgalLbVid;
+      activeEl.style.opacity = '0';
+      setTimeout(function () {
+        if (vid) {
+          subgalLbImg.style.display = 'none';
+          subgalLbVid.style.display = '';
+          subgalLbVid.poster = src;
+          subgalLbVid.src = vid;
+          subgalLbVid.style.opacity = '1';
+        } else {
+          subgalLbImg.style.display = '';
+          subgalLbVid.style.display = 'none';
+          subgalLbVid.src = '';
+          subgalLbImg.src = src;
+          subgalLbImg.style.opacity = '1';
+        }
+      }, 120);
+      subgalLbCnt.textContent = (sgIdx + 1) + ' / ' + sgImages.length;
+      subgalLbCap.innerHTML = cap ? cap.replace(/\n/g, '<br>') : '';
+      subgalLbCap.style.display = cap ? '' : 'none';
+      subgalLbCap.scrollTop = 0;
+      document.getElementById('subgalLbPrev').style.visibility = sgIdx > 0 ? '' : 'hidden';
+      document.getElementById('subgalLbNext').style.visibility = sgIdx < sgImages.length - 1 ? '' : 'hidden';
+    }
+
+    document.getElementById('subgalLbX')   .addEventListener('click', closeSgLb);
+    document.getElementById('subgalLbPrev').addEventListener('click', function () { if (sgIdx > 0) { sgIdx--; renderSgLb(); } });
+    document.getElementById('subgalLbNext').addEventListener('click', function () { if (sgIdx < sgImages.length - 1) { sgIdx++; renderSgLb(); } });
+
+    document.addEventListener('keydown', function (e) {
+      if (!subgalLb.classList.contains('open')) return;
+      if (e.key === 'ArrowLeft')  { if (sgIdx > 0)                   { sgIdx--; renderSgLb(); } }
+      if (e.key === 'ArrowRight') { if (sgIdx < sgImages.length - 1) { sgIdx++; renderSgLb(); } }
+      if (e.key === 'Escape')     { closeSgLb(); }
+    });
+  })();
+
+  </script>
+</body>
+</html>
